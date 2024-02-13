@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src = "https://ajax.aspnetCDN.com/ajax/jQuery/jQuery-3.3.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" onclick="fetch();">Click here to fetch</button>
+
+    <ul class="test">
+        
+    </ul>
+
+    <script>
+        function fetch(){
+           $.ajax({
+                url : "https://catfact.ninja/fact",
+                type : 'GET',
+                datatype: "JSON",
+                data  : JSON.stringify({ }),
+                success: function(data){
+                    $(".test").append("<li>" + JSON.stringify(data) + "</li>")
+                }
+            });
+         }
+    </script>
+</body>
+</html>
+

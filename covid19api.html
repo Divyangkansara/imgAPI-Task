@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src = "https://ajax.aspnetCDN.com/ajax/jQuery/jQuery-3.3.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" onclick="fetchApi()">Click here to see the data</button>
+
+    <p id="covid">
+
+    </p>
+
+
+    <script>
+        function fetchApi(){
+            $.ajax({
+                url : "https://data.covid19india.org/v4/min/timeseries.min.json",
+                type : 'GET',
+                datatype : 'JSON',
+                success : function(data){
+                    //$("#covid").append(JSON.stringify(data))
+                    console.log(data)
+                }
+            });
+        }
+    </script>
+</body>
+</html>

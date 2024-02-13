@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Search</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<!-- Search bar -->
+<input type="text" id="searchInput" placeholder="Search image name">
+<button onclick="searchImages()">Search</button>
+
+<!-- Image container -->
+<div id="image-container">
+    <!-- Images will be displayed here -->
+</div>
+
+<script>
+    // Function to fetch and display images based on the search query
+    function searchImages() {
+        var searchTerm = $('#searchInput').val().toLowerCase();
+
+        // Your API endpoint URL
+        var apiUrl = 'https://65a8fbd3219bfa37186818c8.mockapi.io/spins';
+
+        // Make an AJAX request to fetch image data
+        $.ajax({
+            url: apiUrl,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Clear the previous images
+                $('#image-container').empty();
+
+                // Process the retrieved data
+                if (data && data.length > 0) {
+                    // Iterate through the array and append matching images to the container
+                    data.forEach(function (image_url) {
+                        if (image_url.includes(searchTerm)) {
+                            $('#image-container').append('<img src="' + image_url.image_url + '" alt="Image">');
+                        }
+                    });
+
+                    // Display a message if no matching images are found
+                    if ($('#image-container').is(':empty')) {
+                        $('#image-container').html('<p>No matching images found.</p>');
+                    }
+                } else {
+                    // Handle the case when no images are returned
+                    $('#image-container').html('<p>No images available.</p>');
+                }
+            },
+            error: function () {
+                // Handle the error case
+                $('#image-container').html('<p>Error fetching images.</p>');
+            }
+        });
+    }
+
+    // Bind the searchImages function to the Enter key press event in the search input
+    $('#searchInput').keypress(function (e) {
+        if (e.which === 13) { // 13 is the Enter key code
+            searchImages();
+        }
+    });
+</script>
+
+</body>
+</html>

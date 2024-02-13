@@ -1,0 +1,16 @@
+#image-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+img{
+    width: 147px;
+    height:198px;
+    object-fit: cover;
+    margin: 5px;
+}
+
+.search-bar{
+    justify-content: center;
+    display: flex;
+}
